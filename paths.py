@@ -1,12 +1,5 @@
 """
 Central location for all runtime data files.
-
-When packaged as an exe the working directory may be read-only, so
-everything is stored under %APPDATA%\\GTA5-scrobbler instead:
-  config.json        settings
-  fingerprints.pkl   fingerprint database (built by fingerprint.py)
-  app.log            full log (every engine/GUI message + scrobbles)
-  .env               Last.fm API key / secret / session key
 """
 
 import datetime

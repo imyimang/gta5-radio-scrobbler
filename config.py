@@ -2,9 +2,7 @@
 Load config.json (non-sensitive settings).
 
 Missing keys are filled with built-in defaults, so config.json only
-needs to contain the keys you want to override. Sensitive data
-(Last.fm API keys etc.) does not belong here; put it in .env
-(see lastfm_config.py).
+needs to contain the keys you want to override.
 """
 
 import json
@@ -75,6 +73,13 @@ def _deep_merge(defaults, user):
 
 
 def _load():
+    """
+    Read config.json and merge it over the built-in defaults.
+
+    Called at import time, so this runs
+    exactly once when 'config' is first imported. The result is
+    exposed as the module-level CONFIG.
+    """
     if CONFIG_FILE.exists():
         try:
             user = json.loads(
@@ -102,7 +107,6 @@ def save(updates):
     into the current CONFIG so unrelated keys are preserved. The
     in-memory CONFIG is updated too.
     """
-    import json
 
     merged = _deep_merge(CONFIG, updates)
     CONFIG.clear()

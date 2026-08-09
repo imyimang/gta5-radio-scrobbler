@@ -16,7 +16,7 @@ import librosa
 
 from config import CONFIG
 
-# proctap raw format (fixed, does not change with config)
+# proctap raw format (fixed, does not change with config).
 CAPTURE_SAMPLE_RATE = 48000
 
 SAMPLE_RATE = CONFIG["fingerprint"]["sample_rate"]

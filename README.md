@@ -1,53 +1,48 @@
 # GTA5 Radio Scrobbler
 
 Real-time music detector for the GTA5 in-game radio that automatically scrobbles
-the songs to Last.fm. Captures the audio of **the GTA5 process only** (nothing
-else gets mixed in) and identifies songs by matching audio fingerprints against
-your local music folder.
+the songs to Last.fm.
 
-> **Note:** This tool works by matching the in-game audio with fingerprints generated 
-> from your local music collection.
+Captures the audio of the GTA5 process only and identifies songs by matching audio fingerprints generated from your GTA5 User Music folder.
+
+Because it reads the game's audio stream directly, the radio can be scrobbled with no speakers or headphones needed.
 
 ## Demo
 
 [![Watch the demo](https://img.youtube.com/vi/Ho8KkRYwwsk/hqdefault.jpg)](https://youtu.be/Ho8KkRYwwsk)
 
-## Features
-
-- **Windows Only:** Captures GTA5 process audio directly (WASAPI process loopback)
-- Fingerprint matching with multi-window voting to reduce false positives
-- Updates Last.fm "now playing" within ~10 seconds, auto-scrobbles after threshold
-- Works offline/without Last.fm (scrobbling is simply skipped)
-
 ## Requirements
 
 - **OS:** Windows 10 (version 2004+) / Windows 11
 - **Game:** GTA5 / GTA5 Enhanced running with audio output
-- **Music:** A local folder containing the tracks played on GTA5 radio
+- **Music:** A local folder containing the tracks played on GTA5 radio.
+  Make sure the files carry ID3 tags (artist/title) — scrobbling uses the
+  tags; when they are missing the file name is parsed instead (expects a
+  `Artist - Title` layout) and untagged tracks may fail to scrobble.
 
 ## Install & Run
 
-**Packaged release (recommended):** 
-1. Download the latest `.zip` from Releases.
-2. Extract the archive.
-3. Run `GTA5Scrobbler.exe` (No Python installation required).
-
-**From source (developers):**
+**From source (recommended):**
 
 ```powershell
 pip install -r requirements.txt
 python gui.py
 ```
 
+**Packaged release :** 
+1. Download the latest `.zip` from Releases.
+2. Extract the archive.
+3. Run `GTA5Scrobbler.exe` (No Python installation required).
+
 ## Usage
 
-1. **Music folder** — Settings -> Music folder -> Browse..., pick your music
-   folder.
-2. **Build Database** — click **Build Database** in the GUI. This scans your
-   music folder and fingerprints every song.
-3. **Last.fm** — create an API account at
+1. **Last.fm** — create an API account at
    <https://www.last.fm/api/account/create>, enter key/secret in Settings,
    then click **Authorize Last.fm** and confirm in the browser.
+2. **Music folder** — Settings -> Music folder -> Browse..., pick your music
+   folder.
+3. **Build Database** — click **Build Database** in the GUI. This scans your
+   music folder and fingerprints every song.
 4. **Start** — click **Start**, launch GTA5 if it isn't running, and the app
    detects and scrobbles your in-game radio.
 
@@ -69,6 +64,9 @@ All data lives in `%APPDATA%\GTA5-scrobbler`:
 A track is scrobbled once it is **> 30 seconds** and played at least
 **50% of its length or 4 minutes** (whichever comes first). The scrobble
 timestamp is the track start time.
+
+Both rules rely on the track duration from the file's ID3 tags — files
+without tags (or with a wrong tag duration) may fail these checks and never scrobble.
 
 ## Notes
 

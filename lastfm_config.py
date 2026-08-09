@@ -1,13 +1,6 @@
 """
 Last.fm settings: reads sensitive data from .env.
 
-API key / secret / session key are sensitive; they do not belong in
-config.json and must never be committed. Put them in .env:
-
-    LASTFM_API_KEY=your_key
-    LASTFM_API_SECRET=your_secret
-    LASTFM_SESSION_KEY=your_session_key
-
 The .env file lives in the data directory (%APPDATA%\\GTA5-scrobbler)
 and is written by the GUI authorization flow. If the same key also
 exists as a system environment variable, the environment variable
@@ -36,7 +29,10 @@ LASTFM_SESSION_KEY = ""
 
 
 def _parse_env_file(path):
-    """Read KEY=value pairs from a .env file (values kept raw)."""
+    """
+    Minimal .env parser so the project doesn't need python-dotenv.
+    Read KEY=value pairs from a .env file (values kept raw).
+    """
 
     values = {}
 

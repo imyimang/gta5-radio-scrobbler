@@ -63,12 +63,11 @@ def find_music_files():
 
     files = []
 
+    # GTA5 Self Radio only supports these formats
     for ext in (
         "*.mp3",
-        "*.wav",
-        "*.flac",
+        "*.wma",
         "*.m4a",
-        "*.ogg",
     ):
         files.extend(root.glob("**/" + ext))
 
