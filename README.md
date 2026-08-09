@@ -59,7 +59,7 @@ All data lives in `%APPDATA%\GTA5-scrobbler`:
 
 | File | Purpose |
 |---|---|
-| `config.json` | Settings (also editable in the GUI) |
+| `config.json` | Settings — only the music folder is set in the GUI, everything else is edited here |
 | `.env` | Last.fm API key / secret / session key — never share it |
 | `fingerprints.pkl` | Fingerprint database (rebuild after changing music) |
 | `app.log` | Full log including successful scrobbles |
