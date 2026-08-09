@@ -1,0 +1,6 @@
+proc-tap==1.1.1
+pycaw==20251023
+pylast==7.1.0
+mutagen==1.47.0
+librosa==0.11.0
+numpy==2.2.4
