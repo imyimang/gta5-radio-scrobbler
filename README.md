@@ -74,3 +74,17 @@ without tags (or with a wrong tag duration) may fail these checks and never scro
 - The `fingerprint` / `matching` settings in `config.json` affect both
   fingerprinting and matching — after changing them you must rebuild the
   database.
+
+## Project structure
+
+| File | Purpose |
+|---|---|
+| `gui.py` | Entry point (`python gui.py`). Tkinter GUI: setup/authorization, settings, progress bar, live log. |
+| `engine.py` | Real-time loop: captures GTA5 audio, matches it, decides on the song, scrobbles. Runs in a background thread. |
+| `recognize.py` | Fingerprint matching core: resamples 48kHz → 11025Hz, builds query fingerprints, multi-window voting. |
+| `fingerprint.py` | Builds the `fingerprints.pkl` database by fingerprinting every song in the music folder. |
+| `scrobble.py` | Reads ID3 tags (falls back to the file name), applies Last.fm rules, sends now-playing / scrobbles. |
+| `auth.py` | Last.fm authorization flow (API key/secret → browser → session key). |
+| `config.py` | Loads `config.json` (non-sensitive settings) with built-in defaults. |
+| `lastfm_config.py` | Loads sensitive settings from `.env` (API key / secret / session key). |
+| `paths.py` | Central paths for the data files and the `log_line()` helper. |
